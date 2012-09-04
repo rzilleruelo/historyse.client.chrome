@@ -1,0 +1,26 @@
+{
+    "name": "HistorySE",
+    "version": "0.0.0",
+    "manifest_version": 2,
+    "description": "HistorySE client",
+    "browser_action": {
+        "default_icon": "assets/images/hse_icon.png",
+        "default_title": "HistorySE",
+        "default_popup": "sign_in.html"
+    },
+    "background": {
+        "page": "background.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["assets/javascript/public/jquery.min.js", "assets/javascript/window_events_notifier.js"]
+      }
+    ],
+    "permissions": [
+        "webRequest",
+        "tabs",
+        "http://*/*",
+        "https://*/*"
+    ]
+}

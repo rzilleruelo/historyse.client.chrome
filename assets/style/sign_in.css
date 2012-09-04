@@ -1,0 +1,79 @@
+body {
+  width: 220px;
+  overflow-x:hidden;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  color: #666666;
+}
+
+div {
+  margin: 8px 0px 8px 0px;
+}
+
+.input {
+  width: 200px;
+  height: 22px;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  padding: 0 5px 0 5px;
+}
+
+.logo {
+  font-size: 20px;
+}
+
+.logo_history {
+  color: #FF9900;
+}
+
+#container {
+  position:relative;
+  width: 100%;
+  height: 40px;
+}
+  
+#sign_in {
+  position: absolute;
+  width: 70px;
+  height: 35px;
+  left: -4px;
+  margin: 2px 0 0 0;
+}
+  
+#sign_in.signed_in {
+  background: transparent url("/assets/images/signout.png") no-repeat;
+}
+
+#sign_in.signed_in:hover {
+  background: transparent url("/assets/images/signout_highlighted.png") no-repeat;
+}
+
+#sign_in.signed_out {
+  background: transparent url("/assets/images/signin.png") no-repeat;
+}
+
+#sign_in.signed_out:hover {
+  background: transparent url("/assets/images/signin_highlighted.png") no-repeat;
+}
+
+#sign_in.signed_out_frozen {
+  background: transparent url("/assets/images/signin_highlighted.png") no-repeat;
+}
+  
+#loader{
+  position: absolute;
+  left: 70px;
+  top: 5px;
+}
+  
+#track {
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
+
+#feedback {
+  color: #FF0000;
+  text-align: center;
+  font-size: 12px;
+}
