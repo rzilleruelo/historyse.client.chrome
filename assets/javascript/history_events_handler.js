@@ -2,7 +2,11 @@ should_track = function() {
   return localStorage["track"] == "true" && localStorage["signed_in"] == "true";
 }
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
+handle_get_window_events_sampling_rate = function(request, sender, sendResponse) {
+  sendResponse({window_events_sampling_rate: config.historyse.window_events_sampling_rate});
+}
+
+handle_window_event = function(request, sender, sendResponse) {
   if (should_track()) {
     request_params = {
       client_created_at: request.timestamp,
@@ -13,6 +17,13 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
     }
     console.log(request_params);
   }
+};
+
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse){
+  if (request.type == 'get_window_events_sampling_rate')
+    handle_get_window_events_sampling_rate(request, sender, sendResponse);
+  else if (request.type == 'window_event')
+    handle_window_event(request, sender, sendResponse);
 });
 
 chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
@@ -37,3 +48,17 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
     console.log(request_params);
   }
 }, {urls: [], types: ["main_frame", "xmlhttprequest"]}, ["requestHeaders"]);
+
+last_tab_id = null;
+chrome.tabs.onActivated.addListener(function(activeInfo){
+  if (should_track()) {
+    request_params = {
+      client_created_at: new Date().getTime(),
+      tab_id: activeInfo.tabId
+    }
+    if (last_tab_id != null)
+      request_params["last_tab_id"] = last_tab_id;
+    console.log(request_params);
+  }
+  last_tab_id = activeInfo.tabId;
+});
