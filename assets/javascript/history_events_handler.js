@@ -63,17 +63,3 @@ chrome.webRequest.onBeforeSendHeaders.addListener(function(details) {
     post(config.historyse.endpoint_history_urls, request_params);
   }
 }, {urls: [], types: ["main_frame", "xmlhttprequest"]}, ["requestHeaders"]);
-
-last_tab_id = null;
-chrome.tabs.onActivated.addListener(function(activeInfo){
-  if (should_track()) {
-    request_params = {
-      source: 'tab',
-      tab_id: activeInfo.tabId
-    }
-    if (last_tab_id != null)
-      request_params["last_tab_id"] = last_tab_id;
-    post(config.historyse.endpoint_history_events, request_params);
-  }
-  last_tab_id = activeInfo.tabId;
-});
