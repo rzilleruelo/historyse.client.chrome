@@ -15,8 +15,11 @@ post = function(url, params){
 
 should_track = function(details) {
   whitelisted_url = true;
-  if (details != undefined)
+  if (details != undefined) {
     whitelisted_url = details.url.indexOf(config.historyse.endpoint) != 0
+    whitelisted_url = whitelisted_url && details.url.indexOf('http://localhost') != 0
+    whitelisted_url = whitelisted_url && details.url.indexOf('https://localhost') != 0
+  }
   return localStorage["track"] == "true" && localStorage["signed_in"] == "true" && whitelisted_url;
 };
 
