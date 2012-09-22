@@ -1,10 +1,15 @@
 {
     "name": "HistorySE",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "manifest_version": 2,
-    "description": "HistorySE client",
+    "description": "http://www.historyse.com chrome client",
+    "icons": {
+      "128": "assets/images/icon128.png",
+      "48": "assets/images/icon48.png",
+      "16": "assets/images/icon16.png"
+    },
     "browser_action": {
-        "default_icon": "assets/images/hse_icon.png",
+        "default_icon": "assets/images/icon128.png",
         "default_title": "HistorySE",
         "default_popup": "sign_in.html"
     },
